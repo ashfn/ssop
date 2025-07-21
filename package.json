@@ -1,0 +1,38 @@
+{
+  "name": "ssop",
+  "version": "1.0.0",
+  "description": "Simple OIDC Provider",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon --exec tsx src/index.ts",
+    "create-user": "tsx tools/create-user.ts"
+  },
+  "type": "module",
+  "dependencies": {
+    "ajv": "^8.12.0",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "inquirer": "^9.2.12",
+    "nodemon": "^3.0.2",
+    "oidc-provider": "^8.4.6",
+    "otplib": "^12.0.1",
+    "qrcode-terminal": "^0.12.0",
+    "tsx": "^4.20.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^4.17.23",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^20.10.5",
+    "@types/oidc-provider": "^8.4.4",
+    "@types/qrcode-terminal": "^0.12.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  }
+}

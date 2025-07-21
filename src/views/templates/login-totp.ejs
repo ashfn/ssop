@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Two-Factor Authentication</h1>
+  <% if (error) { %>
+    <div class="error">Invalid authentication code</div>
+  <% } %>
+  <form method="post" action="<%= actionUrl %>">
+    <% if (uid) { %>
+      <input type="hidden" name="uid" value="<%= uid %>">
+    <% } %>
+    <input type="hidden" name="username" value="<%= username %>">
+    <input type="hidden" name="password" value="<%= password %>">
+    <input 
+      type="text" 
+      name="totp_code" 
+      placeholder="000000" 
+      maxlength="6" 
+      pattern="[0-9]{6}" 
+      autocomplete="one-time-code"
+      style="text-align: center; font-size: 1.5rem; letter-spacing: 0.5rem;"
+      required
+      autofocus>
+    <button type="submit">Verify</button>
+  </form>
+  
+  <div style="text-align: center; margin-top: 1rem;">
+    <a href="<%= backUrl %>" class="link">← Back to login</a>
+  </div>
+</div> 

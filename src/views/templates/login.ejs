@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Sign In</h1>
+  <% if (error) { %>
+    <div class="error">Invalid username or password</div>
+  <% } %>
+  <form method="post" action="<%= actionUrl %>">
+    <% if (uid) { %>
+      <input type="hidden" name="uid" value="<%= uid %>">
+    <% } %>
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Sign In</button>
+  </form>
+</div> 

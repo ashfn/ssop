@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Authorize Application</h2>
+  <div class="info">
+    <strong>Client:</strong> <%= params.client_id %><br>
+    <strong>Scopes:</strong> <%= params.scope %>
+  </div>
+  <p class="text-center">The application is requesting access to your account.</p>
+  <form method="post" action="/interaction/<%= uid %>/consent">
+    <button type="submit" name="consent" value="accept">Allow</button>
+    <button type="submit" name="consent" value="deny" class="danger-button">Deny</button>
+  </form>
+</div> 

@@ -1,0 +1,7 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+When you have written some code tell me what you have changed and do not run it, I am always running my own dev environment so you can just tell me that you've changed something.
+Write as few comments as possible, instead writing code in an understandable way, e.g. if you use the correct variable names you will not need to write comments. Write no additional files that aren't needed, e.g. making a new readme file to explain what you have done. When you change something explain what you changed, why you changed it and why this is better than before where its not obvious. Do not ignore errors like typescript issues and using 'cheat' methods without explicit permission. When you are in any way confused by my requests ask questions and always prefer asking questions to understand the requirements more than deciding yourself.

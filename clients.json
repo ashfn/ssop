@@ -1,0 +1,10 @@
+[
+  {
+    "client_id": "example-app",
+    "client_secret": "example-secret",
+    "redirect_uris": [
+      "http://localhost:8080/callback"
+    ],
+    "scopes": ["openid", "profile", "email", "roles"]
+  }
+] 

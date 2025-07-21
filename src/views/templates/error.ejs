@@ -1,0 +1,11 @@
+<div class="container">
+  <h2>Oops! Something went wrong</h2>
+  <div class="error">
+    <%= message %>
+  </div>
+  <% if (details) { %>
+    <div class="info"><%= details %></div>
+  <% } %>
+  <button onclick="window.history.back()" class="secondary-button">Go Back</button>
+  <button onclick="window.location.href='/'" class="mt-2">Home</button>
+</div> 

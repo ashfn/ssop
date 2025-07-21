@@ -1,0 +1,23 @@
+<div class="container wide-container">
+  <h1>SSOP</h1>
+  <div class="user-info">
+    <% if (user.profile_photo_url) { %>
+      <img src="<%= user.profile_photo_url %>" alt="Profile" class="avatar">
+    <% } else { %>
+      <div class="avatar" style="background: #89b4fa; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; color: #11111b;">
+        <%= user.username.charAt(0).toUpperCase() %>
+      </div>
+    <% } %>
+    <div class="username"><%= user.username %></div>
+    <div class="roles">
+      <% user.roles.forEach(role => { %>
+        <span class="role-tag"><%= role %></span>
+      <% }); %>
+    </div>
+    <div style="color: #6c7086; font-size: 0.9rem;"><%= user.email %></div>
+  </div>
+  
+  <form method="post" action="/logout">
+    <button type="submit" class="danger-button">Sign Out</button>
+  </form>
+</div> 
