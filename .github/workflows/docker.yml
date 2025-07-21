@@ -66,10 +66,10 @@ jobs:
               restart: unless-stopped
               healthcheck:
                 test: ["CMD", "curl", "-f", "http://localhost:3000/.well-known/openid-configuration"]
-                interval: 10s
-                timeout: 5s
-                retries: 5
-                start_period: 30s
+                interval: 15s
+                timeout: 10s
+                retries: 8
+                start_period: 60s
           EOF
 
       - name: Start services
@@ -77,8 +77,8 @@ jobs:
 
       - name: Wait for healthcheck
         run: |
-          echo "Waiting for service to be healthy..."
-          timeout 120s bash -c 'until docker compose -f docker-compose.test.yml ps ssop | grep -q "healthy"; do sleep 5; done'
+          echo "Waiting for service to be healthy (ARM platforms may take longer)..."
+          timeout 180s bash -c 'until docker compose -f docker-compose.test.yml ps ssop | grep -q "healthy"; do sleep 10; done'
           echo "Service is healthy!"
 
       - name: Test OpenID configuration endpoint

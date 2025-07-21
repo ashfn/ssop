@@ -7,7 +7,8 @@ RUN addgroup -g 1001 -S nodejs && \
 
 COPY package*.json ./
 
-RUN apk add --no-cache --virtual .build-deps \
+RUN apk add --no-cache curl \
+    && apk add --no-cache --virtual .build-deps \
     python3 \
     make \
     g++ \
