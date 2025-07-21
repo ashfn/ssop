@@ -70,15 +70,15 @@ Edit `clients.json`:
 docker-compose up -d
 ```
 
-Or directly:
+Or using the pre-built image from GitHub Container Registry:
 
 ```bash
-docker build -t ssop .
 docker run -d -p 3000:3000 \
   -v $(pwd)/users.json:/app/users.json:ro \
   -v $(pwd)/clients.json:/app/clients.json:ro \
   -e ISSUER=http://localhost:3000 \
-  ssop
+  -e COOKIE_SECRET=your-secure-random-secret \
+  ghcr.io/yourusername/ssop:latest
 ```
 
 ## Environment Variables
