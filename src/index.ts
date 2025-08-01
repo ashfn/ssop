@@ -20,7 +20,6 @@ async function startServer() {
   
 
   const provider = createProvider(ISSUER, config, authService);
-  
 
   const app = express();
   

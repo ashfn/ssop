@@ -29,7 +29,13 @@ async function createUser(): Promise<void> {
         name: 'password',
         message: 'Password:',
         mask: '*',
-        validate: (input: string) => input.length >= 4 ? true : 'Password must be at least 4 characters'
+        validate: (input: string) => {
+          if (input.length < 8) return 'Password must be at least 8 characters';
+          if (!/[A-Z]/.test(input)) return 'Password must contain at least one uppercase letter';
+          if (!/[a-z]/.test(input)) return 'Password must contain at least one lowercase letter';
+          if (!/\d/.test(input)) return 'Password must contain at least one number';
+          return true;
+        }
       },
       {
         type: 'input',

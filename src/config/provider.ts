@@ -2,6 +2,7 @@ import { Provider, Configuration, ClientMetadata } from 'oidc-provider';
 import { AuthService } from '../services/auth';
 import { Config } from '../types';
 import MemoryAdapter from './adapter';
+import { randomBytes } from 'crypto';
 
 export function createProvider(issuer: string, config: Config, authService: AuthService): Provider {
   const internalClient: ClientMetadata = {
@@ -18,16 +19,14 @@ export function createProvider(issuer: string, config: Config, authService: Auth
     client_id: client.client_id,
     client_secret: client.client_secret,
     redirect_uris: client.redirect_uris,
-    post_logout_redirect_uris: client.redirect_uris, // Use same URIs for logout
+    post_logout_redirect_uris: client.redirect_uris,
     response_types: ['code'],
     grant_types: ['authorization_code'],
-    token_endpoint_auth_method: 'client_secret_post', // Allow both POST and basic auth
+    token_endpoint_auth_method: 'client_secret_post',
   }));
 
   const configuration: Configuration = {
-    // Disable all internal logging for clean production output
     renderError: async (ctx, out, error) => {
-      // Custom error handler to avoid internal logging
       ctx.type = 'html';
       ctx.body = `<html><body><h1>OIDC Error</h1><p>An error occurred during authentication.</p></body></html>`;
     },
@@ -92,7 +91,6 @@ export function createProvider(issuer: string, config: Config, authService: Auth
       },
     },
 
-    // Auto-approve all scopes for internal applications
     async loadExistingGrant(ctx) {
       if (!ctx.oidc.client) return undefined;
       
@@ -107,7 +105,6 @@ export function createProvider(issuer: string, config: Config, authService: Auth
         accountId: ctx.oidc.session?.accountId,
       });
 
-      // Add all requested scopes
       if (ctx.oidc.params && typeof ctx.oidc.params.scope === 'string') {
         const scopes = ctx.oidc.params.scope.split(' ');
         scopes.forEach(scope => {
@@ -118,7 +115,6 @@ export function createProvider(issuer: string, config: Config, authService: Auth
         grant.addOIDCScope('openid');
       }
 
-      // Add all requested claims
       grant.addOIDCClaims(['sub', 'name', 'preferred_username', 'email', 'email_verified', 'picture', 'roles']);
 
       await grant.save();
@@ -126,8 +122,10 @@ export function createProvider(issuer: string, config: Config, authService: Auth
       return grant;
     },
 
+
+
     cookies: {
-      keys: [process.env.COOKIE_SECRET || 'default-secret-please-change'],
+      keys: [randomBytes(32).toString('hex')],
     },
 
     adapter: MemoryAdapter,
@@ -136,17 +134,15 @@ export function createProvider(issuer: string, config: Config, authService: Auth
       required: () => false,
     },
     
-    // Ensure proper token endpoint configuration
     conformIdTokenClaims: false,
 
-    // Extend session and grant TTLs for better user experience
     ttl: {
-      Session: 86400, // 24 hours
-      Grant: 86400, // 24 hours
-      AccessToken: 3600, // 1 hour
-      AuthorizationCode: 600, // 10 minutes
-      RefreshToken: 86400 * 7, // 7 days
-      IdToken: 3600, // 1 hour
+      Session: 86400,
+      Grant: 86400,
+      AccessToken: 3600,
+      AuthorizationCode: 600,
+      RefreshToken: 86400 * 7,
+      IdToken: 3600,
     },
   };
 
