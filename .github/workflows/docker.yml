@@ -21,12 +21,6 @@ jobs:
           - platform: linux/amd64
             runner: ubuntu-latest
             arch: amd64
-          - platform: linux/arm64
-            runner: ubuntu-latest
-            arch: arm64
-          - platform: linux/arm/v7
-            runner: ubuntu-latest
-            arch: armv7
 
     steps:
       - name: Checkout
