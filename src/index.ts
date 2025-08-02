@@ -21,6 +21,8 @@ async function startServer() {
 
   const provider = createProvider(ISSUER, config, authService);
 
+  provider.proxy = true;
+
   const app = express();
   
   app.set('trust proxy', true);
