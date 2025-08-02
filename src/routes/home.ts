@@ -20,7 +20,7 @@ export function createHomeRoutes(authService: AuthService, provider: Provider): 
       } else {
         const params = new URLSearchParams({
           client_id: 'internal-client',
-          redirect_uri: 'http://localhost:3000/',
+          redirect_uri: `${ISSUER}/`,
           response_type: 'code',
           scope: 'openid profile email roles',
           state: 'home-login'
