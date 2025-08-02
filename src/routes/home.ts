@@ -3,6 +3,7 @@ import { Provider } from 'oidc-provider';
 import { AuthService } from '../services/auth';
 import { renderLogin, renderDashboard, renderError } from '../utils/render';
 import { getCurrentUser } from '../utils/session';
+import { ISSUER } from 'src';
 
 export function createHomeRoutes(authService: AuthService, provider: Provider): Router {
   const router = Router();
