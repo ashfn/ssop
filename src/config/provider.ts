@@ -3,13 +3,14 @@ import { AuthService } from '../services/auth';
 import { Config } from '../types';
 import MemoryAdapter from './adapter';
 import { randomBytes } from 'crypto';
+import { ISSUER } from '../index';
 
 export function createProvider(issuer: string, config: Config, authService: AuthService): Provider {
   const internalClient: ClientMetadata = {
     client_id: 'internal-client',
     client_secret: 'internal-secret',
-    redirect_uris: ['http://localhost:3000/', 'http://localhost:3000/dashboard'],
-    post_logout_redirect_uris: ['http://localhost:3000/'],
+    redirect_uris: ['http://localhost:3000/', 'http://localhost:3000/dashboard', `${ISSUER}/dashboard`, `${ISSUER}/`],
+    post_logout_redirect_uris: [`${ISSUER}/`],
     response_types: ['code'],
     grant_types: ['authorization_code'],
     token_endpoint_auth_method: 'client_secret_post',

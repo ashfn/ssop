@@ -7,7 +7,7 @@ import { createInteractionRoutes } from './routes/interaction';
 import { createHomeRoutes } from './routes/home';
 
 const PORT = process.env.PORT || 3000;
-const ISSUER = process.env.ISSUER || `http://localhost:${PORT}`;
+export const ISSUER = process.env.ISSUER || `http://localhost:${PORT}`;
 
 async function startServer() {
   const config = loadConfig();
@@ -33,7 +33,8 @@ async function startServer() {
   app.use(createHomeRoutes(authService, provider));
   
   app.use(createInteractionRoutes(provider, authService));
-  
+
+
   app.use('/', provider.callback());
   
   app.listen(PORT, () => {
